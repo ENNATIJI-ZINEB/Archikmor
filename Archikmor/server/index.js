@@ -85,6 +85,35 @@ app.post('/api/catalogue/email', async (req, res) => {
         return res.status(400).json({ error: 'Please provide a valid email address.' });
     }
 
+    // Check SMTP configuration before attempting to send
+    const { validateSMTPConfig } = require('./email');
+    const smtpConfigured = validateSMTPConfig();
+
+    if (!smtpConfigured) {
+        return res.status(503).json({
+            error: 'Email service is currently unavailable. Please try downloading the catalogue directly or contact us for assistance.',
+            errorType: 'smtp_config_missing',
+        });
+    }
+
+    // Verify catalogue file exists before attempting to send
+    const cataloguePath = path.join(__dirname, '..', 'catalogue', 'Archikmor-Catalog2026.pdf');
+    if (!fsSync.existsSync(cataloguePath)) {
+        console.error('❌ Catalogue file not found:', cataloguePath);
+        return res.status(404).json({
+            error: 'Catalogue file not found. Please contact support.',
+            errorType: 'file_not_found',
+            filePath: cataloguePath,
+        });
+    }
+
+    // Check file size (many email servers have attachment size limits around 10-25MB)
+    const fileStats = fsSync.statSync(cataloguePath);
+    const fileSizeMB = fileStats.size / (1024 * 1024);
+    if (fileSizeMB > 25) {
+        console.warn('⚠️  Warning: Catalogue file size is', fileSizeMB.toFixed(2), 'MB, may exceed email server limits');
+    }
+
     try {
         await sendCatalogueEmail(sanitizedEmail);
         console.info('Catalogue email request processed for:', sanitizedEmail);
@@ -100,22 +129,55 @@ app.post('/api/catalogue/email', async (req, res) => {
         console.error('   Error code:', error.code || 'N/A');
         console.error('   Error command:', error.command || 'N/A');
         
-        // Check if it's an SMTP-related error
-        if (error.code === 'EAUTH' || error.code === 'ECONNECTION' || error.response) {
-            console.error('   ⚠️  SMTP Authentication/Connection Error Detected');
+        // Determine error type and user-friendly message
+        let errorMessage = 'Unable to send catalogue email right now. Please try again later or contact us directly.';
+        let errorType = 'unknown_error';
+        let statusCode = 500;
+        
+        // Check if it's an SMTP authentication error
+        if (error.code === 'EAUTH') {
+            errorMessage = 'Email service authentication failed. Please check SMTP configuration.';
+            errorType = 'smtp_authentication_failed';
+            console.error('   ⚠️  SMTP Authentication Error Detected');
             console.error('   SMTP Response:', error.response || 'N/A');
             console.error('   SMTP Host:', process.env.SMTP_HOST || 'N/A');
             console.error('   SMTP Port:', process.env.SMTP_PORT || 'N/A');
             console.error('   SMTP Email:', process.env.SMTP_EMAIL || 'N/A');
             console.error('   SMTP Password:', process.env.SMTP_PASSWORD ? '✓ Set' : '✗ Missing');
         }
-        
+        // Check if it's an SMTP connection error
+        else if (error.code === 'ECONNECTION') {
+            errorMessage = 'Cannot connect to email server. Please check network and SMTP settings.';
+            errorType = 'smtp_connection_failed';
+            console.error('   ⚠️  SMTP Connection Error Detected');
+            console.error('   SMTP Host:', process.env.SMTP_HOST || 'N/A');
+            console.error('   SMTP Port:', process.env.SMTP_PORT || 'N/A');
+            console.error('   SMTP Email:', process.env.SMTP_EMAIL || 'N/A');
+        }
         // Check if it's a file-related error
-        if (error.message && error.message.includes('Catalogue file not found')) {
-            const cataloguePath = path.join(__dirname, '..', 'catalogue', 'Archikmor-Catalog2026.pdf');
+        else if (error.message && error.message.includes('Catalogue file not found')) {
+            errorMessage = 'Catalogue file not found. Please contact support.';
+            errorType = 'file_not_found';
+            statusCode = 404;
             console.error('   ⚠️  Catalogue File Error');
             console.error('   Expected path:', cataloguePath);
             console.error('   File exists:', fsSync.existsSync(cataloguePath) ? 'Yes' : 'No');
+        }
+        // Check if it's an SMTP configuration error
+        else if (error.message && error.message.includes('SMTP configuration is missing')) {
+            errorMessage = 'Email service configuration is missing. Please contact support.';
+            errorType = 'smtp_config_missing';
+            statusCode = 503;
+        }
+        // Other SMTP errors
+        else if (error.response || error.code) {
+            errorMessage = `Email service error: ${error.message || 'Unable to send email'}. Please try again later.`;
+            errorType = 'smtp_error';
+            console.error('   ⚠️  SMTP Error Detected');
+            console.error('   SMTP Response:', error.response || 'N/A');
+            console.error('   SMTP Host:', process.env.SMTP_HOST || 'N/A');
+            console.error('   SMTP Port:', process.env.SMTP_PORT || 'N/A');
+            console.error('   SMTP Email:', process.env.SMTP_EMAIL || 'N/A');
         }
         
         // Log full error stack for debugging
@@ -123,9 +185,22 @@ app.post('/api/catalogue/email', async (req, res) => {
             console.error('   Stack trace:', error.stack);
         }
         
-        res.status(500).json({
-            error: 'Unable to send catalogue email right now. Please try again later or contact us directly.',
-        });
+        // Return error response with details
+        const errorResponse = {
+            error: errorMessage,
+            errorType: errorType,
+        };
+        
+        // Include additional details in development mode
+        if (process.env.NODE_ENV !== 'production') {
+            errorResponse.details = {
+                message: error.message,
+                code: error.code || null,
+                command: error.command || null,
+            };
+        }
+        
+        res.status(statusCode).json(errorResponse);
     }
 });
 
@@ -331,6 +406,10 @@ app.post('/api/contact', async (req, res) => {
             project: sanitizedProject || 'Not specified',
         });
 
+        // Check SMTP configuration before attempting to send emails
+        const { validateSMTPConfig } = require('./email');
+        const smtpConfigured = validateSMTPConfig();
+
         // Send emails asynchronously - don't fail the request if emails fail
         const emailPromises = Promise.all([
             sendContactNotification(submission).catch(err => {
@@ -368,33 +447,52 @@ app.post('/api/contact', async (req, res) => {
             }),
         ]);
 
-        emailPromises.then(results => {
-            const [notificationResult, confirmationResult] = results;
-            if (notificationResult?.success) {
-                console.log('✅ Notification email sent successfully to Sales@archikmor.com');
-                console.log('   Message ID:', notificationResult.messageId);
-            } else {
-                console.warn('⚠️  Notification email may not have been sent');
-                if (notificationResult?.error) {
-                    console.warn('   Error:', notificationResult.error);
-                }
-            }
-            if (confirmationResult?.success) {
-                console.log('✅ Confirmation email sent successfully to user:', submission.email);
-                console.log('   Message ID:', confirmationResult.messageId);
-            } else {
-                console.error('❌ Confirmation email FAILED to send to:', submission.email);
-                if (confirmationResult?.error) {
-                    console.error('   Error:', confirmationResult.error);
-                }
-                console.error('   ⚠️  ACTION REQUIRED: Check SMTP configuration in .env file');
-            }
-        }).catch(err => {
-            console.error('❌ Email sending process error:', err.message);
-            console.error('   Stack:', err.stack);
-        });
+        // Wait for email results to provide accurate feedback
+        const emailResults = await emailPromises;
+        const [notificationResult, confirmationResult] = emailResults;
 
-        res.status(201).json({ success: true, message: 'Thank you for reaching out! We will get back to you shortly. A confirmation email has been sent to your inbox.' });
+        if (notificationResult?.success) {
+            console.log('✅ Notification email sent successfully to Sales@archikmor.com');
+            console.log('   Message ID:', notificationResult.messageId);
+        } else {
+            console.warn('⚠️  Notification email may not have been sent');
+            if (notificationResult?.error) {
+                console.warn('   Error:', notificationResult.error);
+            }
+        }
+
+        if (confirmationResult?.success) {
+            console.log('✅ Confirmation email sent successfully to user:', submission.email);
+            console.log('   Message ID:', confirmationResult.messageId);
+        } else {
+            console.error('❌ Confirmation email FAILED to send to:', submission.email);
+            if (confirmationResult?.error) {
+                console.error('   Error:', confirmationResult.error);
+            }
+            console.error('   ⚠️  ACTION REQUIRED: Check SMTP configuration in .env file');
+        }
+
+        // Determine response message based on email results
+        let responseMessage = 'Thank you for reaching out! We will get back to you shortly.';
+        let emailStatus = 'partial';
+
+        if (!smtpConfigured) {
+            responseMessage = 'Thank you for reaching out! Your message has been received. However, email notifications are currently unavailable. We will contact you directly.';
+            emailStatus = 'unavailable';
+        } else if (confirmationResult?.success) {
+            responseMessage = 'Thank you for reaching out! We will get back to you shortly. A confirmation email has been sent to your inbox.';
+            emailStatus = 'success';
+        } else if (confirmationResult?.error) {
+            responseMessage = 'Thank you for reaching out! Your message has been received, but we were unable to send a confirmation email. We will contact you directly.';
+            emailStatus = 'failed';
+        }
+
+        res.status(201).json({ 
+            success: true, 
+            message: responseMessage,
+            emailStatus: emailStatus,
+            emailSent: confirmationResult?.success || false
+        });
     } catch (error) {
         console.error('Failed to store contact submission', error);
         res.status(500).json({ error: 'Unable to save your request right now. Please try again later.' });
@@ -473,8 +571,12 @@ app.post('/api/newsletter', async (req, res) => {
 
         console.info('Newsletter subscription received', subscriber);
 
+        // Check SMTP configuration before attempting to send emails
+        const { validateSMTPConfig } = require('./email');
+        const smtpConfigured = validateSMTPConfig();
+
         // Send emails asynchronously - don't fail the request if emails fail
-        Promise.all([
+        const emailPromises = Promise.all([
             sendNewsletterNotification(subscriber).catch(err => {
                 console.error('❌ Failed to send newsletter notification email to Sales@archikmor.com');
                 console.error('   Error details:', {
@@ -482,6 +584,7 @@ app.post('/api/newsletter', async (req, res) => {
                     code: err.code,
                     command: err.command,
                 });
+                return { success: false, error: err.message };
             }),
             sendNewsletterConfirmation(subscriber).catch(err => {
                 console.error('❌ Failed to send newsletter confirmation email to subscriber:', subscriber.email);
@@ -490,22 +593,53 @@ app.post('/api/newsletter', async (req, res) => {
                     code: err.code,
                     command: err.command,
                 });
+                return { success: false, error: err.message };
             }),
-        ]).then(results => {
-            const [notificationResult, confirmationResult] = results;
-            if (notificationResult?.success) {
-                console.log('✅ Newsletter notification email sent successfully');
+        ]);
+
+        // Wait for email results to provide accurate feedback
+        const emailResults = await emailPromises;
+        const [notificationResult, confirmationResult] = emailResults;
+
+        if (notificationResult?.success) {
+            console.log('✅ Newsletter notification email sent successfully');
+        } else {
+            console.warn('⚠️  Newsletter notification email may not have been sent');
+            if (notificationResult?.error) {
+                console.warn('   Error:', notificationResult.error);
             }
-            if (confirmationResult?.success) {
-                console.log('✅ Newsletter confirmation email sent successfully');
+        }
+
+        if (confirmationResult?.success) {
+            console.log('✅ Newsletter confirmation email sent successfully');
+        } else {
+            console.error('❌ Newsletter confirmation email FAILED to send to:', subscriber.email);
+            if (confirmationResult?.error) {
+                console.error('   Error:', confirmationResult.error);
             }
-        }).catch(err => {
-            console.error('❌ Newsletter email sending process error:', err.message);
-        });
+            console.error('   ⚠️  ACTION REQUIRED: Check SMTP configuration in .env file');
+        }
+
+        // Determine response message based on email results
+        let responseMessage = 'Welcome aboard! You will start receiving our updates shortly.';
+        let emailStatus = 'partial';
+
+        if (!smtpConfigured) {
+            responseMessage = 'Thank you for subscribing! Your subscription has been recorded. However, email notifications are currently unavailable. We will contact you directly.';
+            emailStatus = 'unavailable';
+        } else if (confirmationResult?.success) {
+            responseMessage = 'Welcome aboard! You will start receiving our updates shortly. A confirmation email has been sent to your inbox.';
+            emailStatus = 'success';
+        } else if (confirmationResult?.error) {
+            responseMessage = 'Thank you for subscribing! Your subscription has been recorded, but we were unable to send a confirmation email. We will contact you directly.';
+            emailStatus = 'failed';
+        }
 
         return res.status(201).json({
             success: true,
-            message: 'Welcome aboard! You will start receiving our updates shortly.',
+            message: responseMessage,
+            emailStatus: emailStatus,
+            emailSent: confirmationResult?.success || false
         });
     } catch (error) {
         console.error('Failed to store newsletter subscription', error);
@@ -556,6 +690,20 @@ if (require.main === module) {
     console.log('   SUPABASE_URL:', process.env.SUPABASE_URL ? '✓ Set' : '✗ Missing');
     console.log('   SUPABASE_SERVICE_KEY:', process.env.SUPABASE_SERVICE_KEY ? '✓ Set' : '✗ Missing');
     console.log('');
+
+    // Validate SMTP configuration on startup
+    const { validateSMTPConfig } = require('./email');
+    const smtpConfigured = validateSMTPConfig();
+    
+    if (!smtpConfigured) {
+        console.warn('⚠️  WARNING: SMTP configuration is missing or incomplete!');
+        console.warn('   Email confirmations will not be sent until SMTP is configured.');
+        console.warn('   Please set SMTP_EMAIL and SMTP_PASSWORD in your .env file.');
+        console.warn('   Contact form and newsletter submissions will still be saved to the database.\n');
+    } else {
+        console.log('✅ SMTP configuration validated successfully');
+        console.log('   Email notifications are enabled.\n');
+    }
 
     app.listen(PORT, '0.0.0.0', () => {
         console.log(`🚀 ARCHIKMOR backend listening on http://0.0.0.0:${PORT}`);

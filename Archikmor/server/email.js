@@ -760,6 +760,23 @@ The ARCHIKMOR Team
 
     try {
         console.log('📧 Attempting to send catalogue email to:', recipientEmail);
+        
+        // Verify file exists and is readable before sending
+        if (!fs.existsSync(cataloguePath)) {
+            const error = new Error('Catalogue file not found');
+            error.code = 'FILE_NOT_FOUND';
+            throw error;
+        }
+        
+        // Check file size (some email servers have attachment size limits)
+        const fileStats = fs.statSync(cataloguePath);
+        const fileSizeMB = fileStats.size / (1024 * 1024);
+        console.log('   Catalogue file size:', fileSizeMB.toFixed(2), 'MB');
+        
+        if (fileSizeMB > 25) {
+            console.warn('   ⚠️  Warning: File size exceeds 25MB, may be rejected by some email servers');
+        }
+        
         const info = await transporter.sendMail(mailOptions);
         console.info('✅ Catalogue email sent successfully!');
         console.info('   Message ID:', info.messageId);
@@ -767,12 +784,26 @@ The ARCHIKMOR Team
         return { success: true, messageId: info.messageId };
     } catch (error) {
         console.error('❌ Failed to send catalogue email');
+        console.error('   To:', recipientEmail);
         console.error('   Error:', error.message);
-        console.error('   Code:', error.code);
-        console.error('   Command:', error.command);
+        console.error('   Code:', error.code || 'N/A');
+        console.error('   Command:', error.command || 'N/A');
+        
+        if (error.code === 'EAUTH') {
+            console.error('   ⚠️  SMTP Authentication Error');
+            console.error('   Please verify SMTP_EMAIL and SMTP_PASSWORD in .env file');
+        } else if (error.code === 'ECONNECTION') {
+            console.error('   ⚠️  SMTP Connection Error');
+            console.error('   Please verify SMTP_HOST and SMTP_PORT in .env file');
+        } else if (error.code === 'FILE_NOT_FOUND') {
+            console.error('   ⚠️  Catalogue File Not Found');
+            console.error('   Expected path:', cataloguePath);
+        }
+        
         if (error.response) {
             console.error('   SMTP Response:', error.response);
         }
+        
         throw error;
     }
 }
@@ -1141,6 +1172,7 @@ function escapeHtml(text) {
 }
 
 module.exports = {
+    validateSMTPConfig,
     sendContactNotification,
     sendContactConfirmation,
     sendNewsletterNotification,

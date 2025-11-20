@@ -104,6 +104,50 @@ body {
     color: #D4C4A8;
 }
 
+.language-switcher {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #F5F3EE;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-left: 20px;
+    font-family: 'Montserrat', sans-serif;
+    letter-spacing: 1px;
+    border: none;
+}
+
+.language-switcher:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.header.scrolled .language-switcher {
+    background: rgba(122, 122, 79, 0.1);
+    border-color: rgba(122, 122, 79, 0.3);
+    color: #7A7A4F;
+}
+
+.header.scrolled .language-switcher:hover {
+    background: rgba(122, 122, 79, 0.2);
+    border-color: rgba(122, 122, 79, 0.5);
+}
+
+.lang-code {
+    display: inline-block;
+    min-width: 30px;
+    text-align: center;
+}
+
+.mobile-lang-switcher {
+    margin: 20px auto;
+    display: block;
+    width: fit-content;
+}
+
 .mobile-menu-btn {
     display: none;
     background: none;

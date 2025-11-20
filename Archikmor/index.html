@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles/main.css">
+    <script src="js/translations.js" defer></script>
 </head>
 <body>
     
@@ -18,7 +19,7 @@
             </div>
             <div>
                 <div class="logo-text">ARCHIKMOR</div>
-                <span class="tagline-small">Timeless Harmony</span>
+                <span class="tagline-small" data-i18n="tagline">Timeless Harmony</span>
             </div>
         </div>
         
@@ -26,55 +27,62 @@
         
         <nav>
             <ul class="nav-menu">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#planning">Space Planning</a></li>
-                <li><a href="#wood">Wood Craft</a></li>
-                <li><a href="#catalogue">Catalog</a></li>
-                <li><a href="#preview">Preview</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home" data-i18n="nav.home">Home</a></li>
+                <li><a href="#planning" data-i18n="nav.planning">Space Planning</a></li>
+                <li><a href="#wood" data-i18n="nav.wood">Wood Craft</a></li>
+                <li><a href="#catalogue" data-i18n="nav.catalogue">Catalog</a></li>
+                <li><a href="#preview" data-i18n="nav.preview">Preview</a></li>
+                <li><a href="#services" data-i18n="nav.services">Services</a></li>
+                <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
         </nav>
+        
+        <button class="language-switcher" id="languageSwitcher" aria-label="Switch language" title="Switch language">
+            <span class="lang-code">EN</span>
+        </button>
     </header>
     
     <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
     <div class="mobile-nav" id="mobileNav">
         <button class="mobile-nav-close" id="mobileNavClose">✕</button>
         <ul class="mobile-nav-menu">
-            <li><a href="#home" class="mobile-nav-link">Home</a></li>
-            <li><a href="#planning" class="mobile-nav-link">Space Planning</a></li>
-            <li><a href="#wood" class="mobile-nav-link">Wood Craft</a></li>
-            <li><a href="#catalogue" class="mobile-nav-link">Catalog</a></li>
-            <li><a href="#preview" class="mobile-nav-link">Preview</a></li>
-            <li><a href="#services" class="mobile-nav-link">Services</a></li>
-            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+            <li><a href="#home" class="mobile-nav-link" data-i18n="nav.home">Home</a></li>
+            <li><a href="#planning" class="mobile-nav-link" data-i18n="nav.planning">Space Planning</a></li>
+            <li><a href="#wood" class="mobile-nav-link" data-i18n="nav.wood">Wood Craft</a></li>
+            <li><a href="#catalogue" class="mobile-nav-link" data-i18n="nav.catalogue">Catalog</a></li>
+            <li><a href="#preview" class="mobile-nav-link" data-i18n="nav.preview">Preview</a></li>
+            <li><a href="#services" class="mobile-nav-link" data-i18n="nav.services">Services</a></li>
+            <li><a href="#contact" class="mobile-nav-link" data-i18n="nav.contact">Contact</a></li>
         </ul>
+        <button class="language-switcher mobile-lang-switcher" id="mobileLanguageSwitcher" aria-label="Switch language" title="Switch language">
+            <span class="lang-code">EN</span>
+        </button>
     </div>
 
     <section class="hero" id="home">
         <div class="hero-content">
             <h1>ARCHIKMOR</h1>
-            <p class="subtitle">Timeless Harmony in Modern Design</p>
-            <a href="#catalogue" class="cta-button">Download Catalog</a>
+            <p class="subtitle" data-i18n="hero.subtitle">Timeless Harmony in Modern Design</p>
+            <a href="#catalogue" class="cta-button" data-i18n="hero.downloadCatalog">Download Catalog</a>
         </div>
     </section>
 
     <section class="space-planning" id="planning">
-        <h2 class="section-title">INTELLIGENT SPACE PLANNING</h2>
+        <h2 class="section-title" data-i18n="planning.title">INTELLIGENT SPACE PLANNING</h2>
         <div class="planning-content">
             <div class="planning-text">
-                <h3>Strategic Design for Optimal Living</h3>
-                <p>At ARCHIKMOR, we believe that great design begins with intelligent space planning. Our approach transforms ordinary spaces into extraordinary experiences through meticulous analysis and creative solutions.</p>
+                <h3 data-i18n="planning.heading">Strategic Design for Optimal Living</h3>
+                <p data-i18n="planning.description1">At ARCHIKMOR, we believe that great design begins with intelligent space planning. Our approach transforms ordinary spaces into extraordinary experiences through meticulous analysis and creative solutions.</p>
                 
-                <p>We consider every aspect of your space - from traffic flow and natural light to functionality and aesthetic harmony - to create environments that work beautifully and feel intuitively right.</p>
+                <p data-i18n="planning.description2">We consider every aspect of your space - from traffic flow and natural light to functionality and aesthetic harmony - to create environments that work beautifully and feel intuitively right.</p>
 
                 <ul class="planning-features">
-                    <li>Customized layout optimization for your specific needs</li>
-                    <li>Traffic flow analysis and circulation planning</li>
-                    <li>Furniture placement and scale consideration</li>
-                    <li>Lighting and electrical planning integration</li>
-                    <li>Storage solutions and spatial organization</li>
-                    <li>Future-proof design for evolving lifestyles</li>
+                    <li data-i18n="planning.features.item1">Customized layout optimization for your specific needs</li>
+                    <li data-i18n="planning.features.item2">Traffic flow analysis and circulation planning</li>
+                    <li data-i18n="planning.features.item3">Furniture placement and scale consideration</li>
+                    <li data-i18n="planning.features.item4">Lighting and electrical planning integration</li>
+                    <li data-i18n="planning.features.item5">Storage solutions and spatial organization</li>
+                    <li data-i18n="planning.features.item6">Future-proof design for evolving lifestyles</li>
                 </ul>
             </div>
             <div class="planning-image"></div>
@@ -83,129 +91,129 @@
         <div class="planning-stats">
             <div class="stat-item">
                 <div class="stat-number">98%</div>
-                <div class="stat-label">Client Satisfaction</div>
+                <div class="stat-label" data-i18n="planning.stats.satisfaction">Client Satisfaction</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">250+</div>
-                <div class="stat-label">Projects Completed</div>
+                <div class="stat-label" data-i18n="planning.stats.projects">Projects Completed</div>
             </div>
             <div class="stat-item">
                 <div class="stat-number">30+</div>
-                <div class="stat-label">Years Experience</div>
+                <div class="stat-label" data-i18n="planning.stats.experience">Years Experience</div>
             </div>
         </div>
     </section>
 
     <section class="wood-showcase" id="wood">
-        <h2 class="section-title">WOOD CRAFT & ARCHITECTURE</h2>
+        <h2 class="section-title" data-i18n="wood.title">WOOD CRAFT & ARCHITECTURE</h2>
         <div class="wood-grid">
             <div class="wood-item">
                 <div class="wood-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1661902374603-0e8a4162498f?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1041')"></div>
                 <div class="wood-overlay">
-                    <h4>Custom Wood Panels</h4>
-                    <p>Handcrafted wood panels that bring warmth and natural elegance to any space</p>
+                    <h4 data-i18n="wood.panels.title">Custom Wood Panels</h4>
+                    <p data-i18n="wood.panels.description">Handcrafted wood panels that bring warmth and natural elegance to any space</p>
                 </div>
             </div>
             <div class="wood-item">
                 <div class="wood-image" style="background-image: url('https://images.unsplash.com/photo-1684928365167-e91916573122?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8d29vZCUyMGtpdGNoZW58ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&q=60&w=600')"></div>
                 <div class="wood-overlay">
-                    <h4>Architectural Woodwork</h4>
-                    <p>Bespoke wood installations that define the character of modern interiors</p>
+                    <h4 data-i18n="wood.architecture.title">Architectural Woodwork</h4>
+                    <p data-i18n="wood.architecture.description">Bespoke wood installations that define the character of modern interiors</p>
                 </div>
             </div>
         </div>
     </section>
     <section class="catalogue-preview" id="preview">
-        <h2 class="section-title">CATALOG PREVIEW</h2>
+        <h2 class="section-title" data-i18n="preview.title">CATALOG PREVIEW</h2>
         <div class="catalogue-grid">
             <div class="catalogue-item">
                 <div class="catalogue-image" style="background-image: url('https://media.istockphoto.com/id/2191829498/photo/wabi-sabi-style-living-room-with-sofa-wicker-chairs-coffee-table-potted-plant-and-parquet.jpg?s=612x612&w=0&k=20&c=eB-HpdGVrS3RvMQpKroW2uKbQshISpkP6eklkl5tOIg=')"></div>
                 <div class="catalogue-content">
-                    <span class="collection-tag">Living Room Collections</span>
-                    <h3>Where Comfort Meets Timeless Design</h3>
-                    <p>Discover elegant living spaces with furniture crafted for comfort and style where timeless design and expert woodworking create the perfect place to gather and unwind.</p>
+                    <span class="collection-tag" data-i18n="preview.livingRoom.tag">Living Room Collections</span>
+                    <h3 data-i18n="preview.livingRoom.heading">Where Comfort Meets Timeless Design</h3>
+                    <p data-i18n="preview.livingRoom.description">Discover elegant living spaces with furniture crafted for comfort and style where timeless design and expert woodworking create the perfect place to gather and unwind.</p>
                 </div>
             </div>
             <div class="catalogue-item">
                 <div class="catalogue-image" style="background-image: url('https://media.istockphoto.com/id/2045383950/photo/digital-render-of-a-serene-bedroom-oasis-with-natural-light.jpg?s=612x612&w=0&k=20&c=GnifMJfGSUd96PE8rxKRVvnIb-vcwIWIuY783FkcPMk=')"></div>
                 <div class="catalogue-content">
-                    <span class="collection-tag">Bedroom & Dressing Collections</span>
-                    <h3>Your Sanctuary of Serenity</h3>
-                    <p>Experience bespoke bedrooms designed for rest and renewal, blending elegant style with smart storage to create a harmonious and peaceful retreat.</p>
+                    <span class="collection-tag" data-i18n="preview.bedroom.tag">Bedroom & Dressing Collections</span>
+                    <h3 data-i18n="preview.bedroom.heading">Your Sanctuary of Serenity</h3>
+                    <p data-i18n="preview.bedroom.description">Experience bespoke bedrooms designed for rest and renewal, blending elegant style with smart storage to create a harmonious and peaceful retreat.</p>
                 </div>
             </div>
             <div class="catalogue-item">
                 <div class="catalogue-image" style="background-image: url('https://media.istockphoto.com/id/907662122/photo/side-white-tile-and-wooden-kitchen-interior-bar.jpg?s=612x612&w=0&k=20&c=uQji4jmIS5ghcQJna4aBTb6MZ5TNdYDuVDCXNiySnRM=')"></div>
                 <div class="catalogue-content">
-                    <span class="collection-tag">Kitchen Collections</span>
-                    <h3>Craftsmanship at the Heart of Your Home</h3>
-                    <p>Discover elegant, functional kitchens crafted from premium woods and finishes custom-designed to bring beauty, durability, and harmony to your everyday living.</p>
+                    <span class="collection-tag" data-i18n="preview.kitchen.tag">Kitchen Collections</span>
+                    <h3 data-i18n="preview.kitchen.heading">Craftsmanship at the Heart of Your Home</h3>
+                    <p data-i18n="preview.kitchen.description">Discover elegant, functional kitchens crafted from premium woods and finishes custom-designed to bring beauty, durability, and harmony to your everyday living.</p>
                 </div>
             </div>
             <div class="catalogue-item">
                 <div class="catalogue-image" style="background-image: url('img/doors.png')"></div>
                 <div class="catalogue-content">
-                    <span class="collection-tag">Interior & Entry Doors Collections</span>
-                    <h3>The Art of First Impressions</h3>
-                    <p>Redefine every entrance with doors that unite craftsmanship, style, and strength creating timeless statements that enhance the character of any space.</p>
+                    <span class="collection-tag" data-i18n="preview.doors.tag">Interior & Entry Doors Collections</span>
+                    <h3 data-i18n="preview.doors.heading">The Art of First Impressions</h3>
+                    <p data-i18n="preview.doors.description">Redefine every entrance with doors that unite craftsmanship, style, and strength creating timeless statements that enhance the character of any space.</p>
                 </div>
             </div>
             <div class="catalogue-item">
                 <div class="catalogue-image" style="background-image: url('https://media.istockphoto.com/id/1478958694/photo/top-view-on-bright-office-room-interior-with-computers-desks.jpg?s=612x612&w=0&k=20&c=Yl3D1IF0MS4jMk4JjNW6rQANB-3WqXfodVjGmSsKouc=')"></div>
                 <div class="catalogue-content">
-                    <span class="collection-tag">Workspace Collections</span>
-                    <h3>Design That Inspires Productivity</h3>
-                    <p>Elevate your workspace with refined wooden furniture that blends ergonomic comfort and timeless design, creating a focused and inspiring environment.</p>
+                    <span class="collection-tag" data-i18n="preview.workspace.tag">Workspace Collections</span>
+                    <h3 data-i18n="preview.workspace.heading">Design That Inspires Productivity</h3>
+                    <p data-i18n="preview.workspace.description">Elevate your workspace with refined wooden furniture that blends ergonomic comfort and timeless design, creating a focused and inspiring environment.</p>
                 </div>
             </div>
             <div class="catalogue-item">
                 <div class="catalogue-image" style="background-image: url('img/office.png')"></div>
                 <div class="catalogue-content">
-                    <span class="collection-tag">Office Collections</span>
-                    <h3>Executive Leadership Desk</h3>
-                    <p>A high-end executive desk with a spacious work surface, integrated side storage, and refined finish.</p>
+                    <span class="collection-tag" data-i18n="preview.office.tag">Office Collections</span>
+                    <h3 data-i18n="preview.office.heading">Executive Leadership Desk</h3>
+                    <p data-i18n="preview.office.description">A high-end executive desk with a spacious work surface, integrated side storage, and refined finish.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="pdf-catalogue" id="catalogue">
-        <h2 class="section-title">DOWNLOAD OUR CATALOG</h2>
-        <p class="pdf-subtitle">Explore our complete collection of wood designs and furniture. Download our detailed catalogue to discover the perfect pieces for your space.</p>
+        <h2 class="section-title" data-i18n="catalogue.title">DOWNLOAD OUR CATALOG</h2>
+        <p class="pdf-subtitle" data-i18n="catalogue.subtitle">Explore our complete collection of wood designs and furniture. Download our detailed catalogue to discover the perfect pieces for your space.</p>
 
         <div class="pdf-container">
             <div class="pdf-card">
                 <span class="pdf-icon">
                     <i class="fas fa-file-pdf"></i>
                 </span>
-                <h3>ARCHIKMOR Catalog 2026</h3>
-                <p>Immerse yourself in curated living, kitchen, workspace, and architectural wood collections designed to bring harmony to every interior.</p>
+                <h3 data-i18n="catalogue.catalogTitle">ARCHIKMOR Catalog 2026</h3>
+                <p data-i18n="catalogue.catalogDescription">Immerse yourself in curated living, kitchen, workspace, and architectural wood collections designed to bring harmony to every interior.</p>
 
                 <div class="pdf-details">
-                    <p><i class="fas fa-layer-group"></i> 6 signature collections</p>
-                    <p><i class="fas fa-ruler-combined"></i> Detailed specifications & finishes</p>
-                    <p><i class="fas fa-images"></i> High-resolution project imagery</p>
+                    <p><i class="fas fa-layer-group"></i> <span data-i18n="catalogue.details.collections">6 signature collections</span></p>
+                    <p><i class="fas fa-ruler-combined"></i> <span data-i18n="catalogue.details.specifications">Detailed specifications & finishes</span></p>
+                    <p><i class="fas fa-images"></i> <span data-i18n="catalogue.details.imagery">High-resolution project imagery</span></p>
                 </div>
 
-                <div class="mobile-download-message" id="mobileMessage">
+                <div class="mobile-download-message" id="mobileMessage" data-i18n="catalogue.mobileMessage">
                     Download on desktop for the best experience, or request the catalogue via email.
                 </div>
 
                 <div class="download-options">
-                    <a href="catalogue/Archikmor-Catalogue2026.pdf" class="download-btn" id="directDownload" download="Archikmor-Catalogue2026.pdf">
-                        <i class="fas fa-download"></i> Download Full Catalog
+                    <a href="catalogue/Archikmor-Catalog2026.pdf" class="download-btn" id="directDownload" download="Archikmor-Catalog2026.pdf">
+                        <i class="fas fa-download"></i> <span data-i18n="catalogue.downloadFull">Download Full Catalog</span>
                     </a>
                     <a href="#preview" class="preview-btn" id="previewLink">
-                        <i class="fas fa-eye"></i> Preview Collections
+                        <i class="fas fa-eye"></i> <span data-i18n="catalogue.previewCollections">Preview Collections</span>
                     </a>
                 </div>
 
                 <div class="email-request-form">
-                    <h4>Prefer Email Delivery?</h4>
-                    <p>If you're having trouble downloading, we can send the catalog directly to your inbox.</p>
+                    <h4 data-i18n="catalogue.emailDelivery.heading">Prefer Email Delivery?</h4>
+                    <p data-i18n="catalogue.emailDelivery.description">If you're having trouble downloading, we can send the catalog directly to your inbox.</p>
                     <div class="email-form-group">
-                        <input type="email" id="emailInput" placeholder="Your email address" required>
-                        <button class="email-submit-btn" id="emailRequestBtn">Send Catalog</button>
+                        <input type="email" id="emailInput" data-i18n-placeholder="catalogue.emailDelivery.placeholder" placeholder="Your email address" required>
+                        <button class="email-submit-btn" id="emailRequestBtn" data-i18n="catalogue.emailDelivery.button" type="button">Send Catalog</button>
                     </div>
                     <div class="form-status email-request-status" id="emailRequestStatus" role="status" aria-live="polite" hidden></div>
                 </div>
@@ -213,8 +221,8 @@
         </div>
 
         <div class="help-section">
-            <h3>Your Dream Project Starts Here</h3>
-            <p>Share your vision with us and let’s bring it to life. Whether you’re imagining a new home, a unique interior, or a full architectural concept, we’re here to listen. Describe your ideas, your needs, and your style.Our team will guide you through every step to turn your dream project into a beautifully crafted reality just contact us:</p>
+            <h3 data-i18n="catalogue.help.heading">Your Dream Project Starts Here</h3>
+            <p data-i18n="catalogue.help.description">Share your vision with us and let's bring it to life. Whether you're imagining a new home, a unique interior, or a full architectural concept, we're here to listen. Describe your ideas, your needs, and your style.Our team will guide you through every step to turn your dream project into a beautifully crafted reality just contact us:</p>
             <div class="contact-info">
                 <span class="contact-line">Sales@archikmor.com</span>
                 <span class="contact-line">+212 783101423</span>
@@ -224,27 +232,27 @@
 
     <!-- Services Section -->
     <section class="services" id="services">
-        <h2 class="section-title">OUR SERVICES</h2>
+        <h2 class="section-title" data-i18n="services.title">OUR SERVICES</h2>
         <div class="services-grid">
             <div class="service-card">
                 <div class="service-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1661962340349-6ea59fff7e7b?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDN8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&q=60&w=600')"></div>
                 <div class="service-content">
-                    <h3>Interior Design</h3>
-                    <p>Complete interior design solutions from concept to execution, creating harmonious spaces that reflect your personality and lifestyle.</p>
+                    <h3 data-i18n="services.interior.title">Interior Design</h3>
+                    <p data-i18n="services.interior.description">Complete interior design solutions from concept to execution, creating harmonious spaces that reflect your personality and lifestyle.</p>
                 </div>
             </div>
             <div class="service-card">
                 <div class="service-image" style="background-image: url('https://plus.unsplash.com/premium_photo-1670076515866-73822a3d610d?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1170')"></div>
                 <div class="service-content">
-                    <h3>Custom Furniture</h3>
-                    <p>Bespoke furniture design and craftsmanship, creating unique pieces that perfectly fit your space and style.</p>
+                    <h3 data-i18n="services.furniture.title">Custom Furniture</h3>
+                    <p data-i18n="services.furniture.description">Bespoke furniture design and craftsmanship, creating unique pieces that perfectly fit your space and style.</p>
                 </div>
             </div>
             <div class="service-card">
                 <div class="service-image" style="background-image: url('/img/planing.png')"></div>
                 <div class="service-content">
-                    <h3>Space Planning</h3>
-                    <p>Strategic space optimization and layout design to maximize functionality while maintaining aesthetic appeal and flow.</p>
+                    <h3 data-i18n="services.spacePlanning.title">Space Planning</h3>
+                    <p data-i18n="services.spacePlanning.description">Strategic space optimization and layout design to maximize functionality while maintaining aesthetic appeal and flow.</p>
                 </div>
             </div>
         </div>
@@ -252,20 +260,20 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <h2 class="section-title">READY TO CREATE YOUR SPACE?</h2>
+        <h2 class="section-title" data-i18n="contact.title">READY TO CREATE YOUR SPACE?</h2>
         <div class="contact-grid">
             <div class="contact-info">
-                <h3>Start Your Journey</h3>
+                <h3 data-i18n="contact.heading">Start Your Journey</h3>
                 <div class="contact-details">
-                    <p><i class="fas fa-map-marker-alt"></i> KM 11 600 BD CHEFCHAOUNI Q I SIDI BERSNOUSSI, CHEZ BN BRAHIM IMMOBILIER, Casablanca</p>
-                    <p><i class="fas fa-phone"></i> +212 783101423</p>
-                    <p><i class="fas fa-envelope"></i> Sales@archikmor.com</p>
-                    <p><i class="fas fa-clock"></i> Mon - Fri: 8AM - 6PM</p>
+                    <p><i class="fas fa-map-marker-alt"></i> <span data-i18n="contact.address">KM 11 600 BD CHEFCHAOUNI Q I SIDI BERSNOUSSI, CHEZ BN BRAHIM IMMOBILIER, Casablanca</span></p>
+                    <p><i class="fas fa-phone"></i> <span data-i18n="contact.phone">+212 783101423</span></p>
+                    <p><i class="fas fa-envelope"></i> <span data-i18n="contact.email">Sales@archikmor.com</span></p>
+                    <p><i class="fas fa-clock"></i> <span data-i18n="contact.hours">Mon - Fri: 8AM - 6PM</span></p>
                 </div>
                 
                 <!-- السوشيال ميديا المُصلحة -->
                 <div class="social-section">
-                    <h4 class="social-title">CONNECT WITH US</h4>
+                    <h4 class="social-title" data-i18n="contact.socialTitle">CONNECT WITH US</h4>
                     <div class="social-links">
                         <a href="https://www.facebook.com/share/19uU8Jr3gz/" target="_blank" title="Facebook">
                             <i class="fab fa-facebook-f"></i>
@@ -282,22 +290,22 @@
             <div class="contact-form">
                 <form id="contactForm" novalidate>
                     <div class="form-group">
-                        <label for="name">Full Name</label>
-                        <input type="text" id="name" name="name" placeholder="Your full name" required>
+                        <label for="name" data-i18n="contact.form.name">Full Name</label>
+                        <input type="text" id="name" name="name" data-i18n-placeholder="contact.form.namePlaceholder" placeholder="Your full name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Email Address</label>
-                        <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
+                        <label for="email" data-i18n="contact.form.email">Email Address</label>
+                        <input type="email" id="email" name="email" data-i18n-placeholder="contact.form.emailPlaceholder" placeholder="your.email@example.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="project">Project Type</label>
-                        <input type="text" id="project" name="project" placeholder="Residential, Commercial, etc.">
+                        <label for="project" data-i18n="contact.form.project">Project Type</label>
+                        <input type="text" id="project" name="project" data-i18n-placeholder="contact.form.projectPlaceholder" placeholder="Residential, Commercial, etc.">
                     </div>
                     <div class="form-group">
-                        <label for="message">Project Details</label>
-                        <textarea id="message" name="message" placeholder="Tell us about your space and vision..." required></textarea>
+                        <label for="message" data-i18n="contact.form.message">Project Details</label>
+                        <textarea id="message" name="message" data-i18n-placeholder="contact.form.messagePlaceholder" placeholder="Tell us about your space and vision..." required></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Begin Your Transformation</button>
+                    <button type="submit" class="submit-btn" data-i18n="contact.form.submit">Begin Your Transformation</button>
                     <div class="form-status" id="contactStatus" role="status" aria-live="polite" hidden></div>
                 </form>
             </div>
@@ -308,7 +316,7 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="footer-logo">ARCHIKMOR</div>
-            <div class="footer-tagline">Where Design Meets Harmony</div>
+            <div class="footer-tagline" data-i18n="footer.tagline">Where Design Meets Harmony</div>
             
             <!-- السوشيال ميديا في الفوتر المُصلحة -->
             <div class="social-links" style="justify-content: center; margin-bottom: 30px;">
@@ -324,15 +332,15 @@
             </div>
             
             <div class="footer-links">
-                <a href="#home">Home</a>
-                <a href="#planning">Space Planning</a>
-                <a href="#wood">Wood Craft</a>
-                <a href="#catalogue">Catalog</a>
-                <a href="#preview">Preview</a>
-                <a href="#services">Services</a>
-                <a href="#contact">Contact</a>
+                <a href="#home" data-i18n="nav.home">Home</a>
+                <a href="#planning" data-i18n="nav.planning">Space Planning</a>
+                <a href="#wood" data-i18n="nav.wood">Wood Craft</a>
+                <a href="#catalogue" data-i18n="nav.catalogue">Catalog</a>
+                <a href="#preview" data-i18n="nav.preview">Preview</a>
+                <a href="#services" data-i18n="nav.services">Services</a>
+                <a href="#contact" data-i18n="nav.contact">Contact</a>
             </div>
-            <div class="footer-bottom">
+            <div class="footer-bottom" data-i18n="footer.copyright">
                 © 2025 ARCHIKMOR. Crafting timeless spaces with wood, wisdom, and harmony.
             </div>
         </div>
@@ -342,23 +350,23 @@
     <div class="newsletter-modal" id="newsletterModal" role="dialog" aria-modal="true" aria-labelledby="newsletterHeading" aria-describedby="newsletterDescription" hidden>
         <div class="newsletter-overlay" data-close="true"></div>
         <div class="newsletter-card" role="document">
-            <button class="newsletter-close" type="button" aria-label="Close newsletter sign-up" data-close="true">
+            <button class="newsletter-close" type="button" data-i18n-aria-label="newsletter.close" aria-label="Close newsletter sign-up" data-close="true">
                 <i class="fa-solid fa-xmark"></i>
             </button>
             <div class="newsletter-content">
-                <p class="newsletter-tagline">Exclusive insights, timeless spaces</p>
-                <h2 id="newsletterHeading">Stay in Archikmor’s Harmony</h2>
-                <p id="newsletterDescription">Subscribe for curated inspiration, project reveals, and members-only offers handpicked by our design studio.</p>
+                <p class="newsletter-tagline" data-i18n="newsletter.tagline">Exclusive insights, timeless spaces</p>
+                <h2 id="newsletterHeading" data-i18n="newsletter.heading">Stay in Archikmor's Harmony</h2>
+                <p id="newsletterDescription" data-i18n="newsletter.description">Subscribe for curated inspiration, project reveals, and members-only offers handpicked by our design studio.</p>
                 <form class="newsletter-form" id="newsletterForm">
                     <label class="newsletter-field">
-                        <span>Name</span>
+                        <span data-i18n="newsletter.name">Name</span>
                         <input type="text" name="name" autocomplete="name" required>
                     </label>
                     <label class="newsletter-field">
-                        <span>Email</span>
+                        <span data-i18n="newsletter.email">Email</span>
                         <input type="email" name="email" autocomplete="email" required>
                     </label>
-                    <button class="newsletter-submit" type="submit">Subscribe</button>
+                    <button class="newsletter-submit" type="submit" data-i18n="newsletter.subscribe">Subscribe</button>
                     <div class="form-status newsletter-status" id="newsletterStatus" role="status" aria-live="polite" hidden></div>
                 </form>
             </div>
@@ -367,11 +375,120 @@
 
     <!-- Download Notification -->
     <div class="download-notification" id="downloadNotification">
-        <span>Download started! Check your downloads folder.</span>
+        <span data-i18n="catalogue.downloadNotification">Download started! Check your downloads folder.</span>
         <button class="close-btn" id="closeNotification">✕</button>
     </div>
 
     <script>
+        // Initialize translation system and language switcher
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for translations.js to load
+            function initLanguageSwitcher() {
+                if (typeof window.i18n === 'undefined') {
+                    setTimeout(initLanguageSwitcher, 100);
+                    return;
+                }
+                
+                // Update language switcher display
+                function updateLanguageSwitcher() {
+                    const currentLang = window.i18n.getCurrentLanguage();
+                    const langSwitchers = document.querySelectorAll('.lang-code');
+                    langSwitchers.forEach(switcher => {
+                        switcher.textContent = currentLang.toUpperCase();
+                    });
+                }
+                
+                // Initialize language switcher display
+                updateLanguageSwitcher();
+                
+                // Handle language switcher clicks
+                const langSwitcher = document.getElementById('languageSwitcher');
+                const mobileLangSwitcher = document.getElementById('mobileLanguageSwitcher');
+                
+                function handleLanguageSwitch() {
+                    const newLang = window.i18n.toggleLanguage();
+                    updateLanguageSwitcher();
+                    
+                    // Update placeholders for inputs with data-i18n-placeholder
+                    document.querySelectorAll('[data-i18n-placeholder]').forEach(input => {
+                        const key = input.getAttribute('data-i18n-placeholder');
+                        input.placeholder = window.i18n.get(key);
+                    });
+                    
+                    // Update aria-labels
+                    document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
+                        const key = element.getAttribute('data-i18n-aria-label');
+                        element.setAttribute('aria-label', window.i18n.get(key));
+                    });
+                    
+                    // Update button text (for buttons with data-i18n attribute)
+                    document.querySelectorAll('button[data-i18n], a[data-i18n]').forEach(button => {
+                        const key = button.getAttribute('data-i18n');
+                        const text = window.i18n.get(key);
+                        // Preserve icon if it exists
+                        const icon = button.querySelector('i');
+                        if (icon) {
+                            button.innerHTML = icon.outerHTML + ' ' + text;
+                        } else {
+                            button.textContent = text;
+                        }
+                    });
+                    
+                    // Update buttons with nested spans (like download buttons)
+                    document.querySelectorAll('[data-i18n] span').forEach(span => {
+                        const parent = span.closest('[data-i18n]');
+                        if (parent) {
+                            const key = parent.getAttribute('data-i18n');
+                            span.textContent = window.i18n.get(key);
+                        }
+                    });
+                    
+                    // Update email request button if not in sending state
+                    const emailRequestBtn = document.getElementById('emailRequestBtn');
+                    if (emailRequestBtn && !emailRequestBtn.disabled) {
+                        const btnText = window.i18n.get('catalogue.emailDelivery.button');
+                        emailRequestBtn.textContent = btnText;
+                    }
+                    
+                    // Update contact form submit button
+                    const contactSubmitBtn = document.querySelector('#contactForm .submit-btn');
+                    if (contactSubmitBtn && !contactSubmitBtn.disabled) {
+                        const submitText = window.i18n.get('contact.form.submit');
+                        contactSubmitBtn.textContent = submitText;
+                    }
+                    
+                    // Update newsletter submit button
+                    const newsletterSubmitBtn = document.querySelector('#newsletterForm .newsletter-submit');
+                    if (newsletterSubmitBtn && !newsletterSubmitBtn.disabled) {
+                        const subscribeText = window.i18n.get('newsletter.subscribe');
+                        newsletterSubmitBtn.textContent = subscribeText;
+                    }
+                }
+                
+                if (langSwitcher) {
+                    langSwitcher.addEventListener('click', handleLanguageSwitch);
+                }
+                
+                if (mobileLangSwitcher) {
+                    mobileLangSwitcher.addEventListener('click', handleLanguageSwitch);
+                }
+                
+                // Update placeholders on initial load
+                document.querySelectorAll('[data-i18n-placeholder]').forEach(input => {
+                    const key = input.getAttribute('data-i18n-placeholder');
+                    input.placeholder = window.i18n.get(key);
+                });
+                
+                // Update aria-labels on initial load
+                document.querySelectorAll('[data-i18n-aria-label]').forEach(element => {
+                    const key = element.getAttribute('data-i18n-aria-label');
+                    element.setAttribute('aria-label', window.i18n.get(key));
+                });
+            }
+            
+            initLanguageSwitcher();
+        });
+        
         // Header transparency effect
         window.addEventListener('scroll', function() {
             const header = document.getElementById('header');
@@ -511,20 +628,24 @@
                     const email = emailInput.value.trim();
                     
                     if (!email) {
-                        updateEmailRequestStatus('Please enter your email address.', 'error');
+                        const msg = window.i18n ? window.i18n.get('catalogue.emailDelivery.errorEmail') : 'Please enter your email address.';
+                        updateEmailRequestStatus(msg, 'error');
                         return;
                     }
                     
                     if (!isValidEmail(email)) {
-                        updateEmailRequestStatus('Please enter a valid email address.', 'error');
+                        const msg = window.i18n ? window.i18n.get('catalogue.emailDelivery.errorInvalid') : 'Please enter a valid email address.';
+                        updateEmailRequestStatus(msg, 'error');
                         return;
                     }
 
                     // Disable button and show loading state
                     emailRequestBtn.disabled = true;
                     const originalText = emailRequestBtn.textContent;
-                    emailRequestBtn.textContent = 'Sending...';
-                    updateEmailRequestStatus('Sending catalogue to your email...', 'pending');
+                    const sendingText = window.i18n ? window.i18n.get('catalogue.emailDelivery.sending') : 'Sending...';
+                    emailRequestBtn.textContent = sendingText;
+                    const sendingStatus = window.i18n ? window.i18n.get('catalogue.emailDelivery.sendingStatus') : 'Sending catalogue to your email...';
+                    updateEmailRequestStatus(sendingStatus, 'pending');
 
                     try {
                         const response = await fetch(`${API_BASE_URL}/api/catalogue/email`, {
@@ -538,17 +659,20 @@
                         const responseBody = await response.json().catch(() => ({}));
 
                         if (!response.ok) {
-                            throw new Error(responseBody.error || 'Unable to send catalogue email right now.');
+                            throw new Error(responseBody.error || (window.i18n ? window.i18n.get('catalogue.emailDelivery.errorGeneric') : 'Unable to send catalogue email right now.'));
                         }
 
                         emailInput.value = '';
-                        updateEmailRequestStatus(responseBody.message || 'Catalogue sent successfully! Please check your email inbox.', 'success');
+                        const successMsg = responseBody.message || (window.i18n ? window.i18n.get('catalogue.emailDelivery.success') : 'Catalogue sent successfully! Please check your email inbox.');
+                        updateEmailRequestStatus(successMsg, 'success');
                     } catch (error) {
                         console.error('ARCHIKMOR catalogue email request failed:', error);
-                        updateEmailRequestStatus(error.message || 'Something went wrong. Please try again later.', 'error');
+                        const errorMsg = error.message || (window.i18n ? window.i18n.get('catalogue.emailDelivery.errorGeneric') : 'Something went wrong. Please try again later.');
+                        updateEmailRequestStatus(errorMsg, 'error');
                     } finally {
                         emailRequestBtn.disabled = false;
-                        emailRequestBtn.textContent = originalText;
+                        const btnText = window.i18n ? window.i18n.get('catalogue.emailDelivery.button') : 'Send Catalog';
+                        emailRequestBtn.textContent = btnText;
                     }
                 });
             }
@@ -573,7 +697,7 @@
                     
                     const downloadUrl = API_BASE_URL 
                         ? `${API_BASE_URL}/api/catalogue/download`
-                        : 'catalogue/Archikmor-Catalogue2026.pdf';
+                        : 'catalogue/Archikmor-Catalog2026.pdf';
                     
                     // Try API endpoint first, fallback to static file
                     if (API_BASE_URL) {
@@ -589,7 +713,7 @@
                                 const url = window.URL.createObjectURL(blob);
                                 const a = document.createElement('a');
                                 a.href = url;
-                                a.download = 'Archikmor-Catalogue2026.pdf';
+                                a.download = 'Archikmor-Catalog2026.pdf';
                                 document.body.appendChild(a);
                                 a.click();
                                 window.URL.revokeObjectURL(url);
@@ -599,7 +723,7 @@
                             .catch(error => {
                                 console.error('API download failed, trying static file:', error);
                                 // Fallback to static file
-                                window.location.href = 'catalogue/Archikmor-Catalogue2026.pdf';
+                                window.location.href = 'catalogue/Archikmor-Catalog2026.pdf';
                                 showDownloadNotification();
                             });
                     } else {
@@ -623,12 +747,14 @@
                     };
 
                     if (!payload.name || !payload.email || !payload.message) {
-                        updateContactStatus('Please complete your name, email, and project details before submitting.', 'error');
+                        const errorMsg = window.i18n ? window.i18n.get('contact.form.errorRequired') : 'Please complete your name, email, and project details before submitting.';
+                        updateContactStatus(errorMsg, 'error');
                         return;
                     }
 
                     toggleContactSubmitting(true);
-                    updateContactStatus('Sending your request...', 'pending');
+                    const sendingMsg = window.i18n ? window.i18n.get('contact.form.sendingStatus') : 'Sending your request...';
+                    updateContactStatus(sendingMsg, 'pending');
 
                     try {
                         const response = await fetch(`${API_BASE_URL}/api/contact`, {
@@ -641,14 +767,20 @@
 
                         const responseBody = await response.json().catch(() => ({}));
                         if (!response.ok) {
-                            throw new Error(responseBody.error || 'Unable to submit your request right now.');
+                            throw new Error(responseBody.error || (window.i18n ? window.i18n.get('contact.form.errorGeneric') : 'Unable to submit your request right now.'));
                         }
 
                         contactForm.reset();
-                        updateContactStatus(responseBody.message || 'Thank you for reaching out! Our team will connect with you shortly.', 'success');
+                        // Use appropriate status based on email result
+                        const status = responseBody.emailStatus === 'failed' || responseBody.emailStatus === 'unavailable' 
+                            ? 'warning' 
+                            : 'success';
+                        const successMsg = responseBody.message || (window.i18n ? window.i18n.get('contact.form.success') : 'Thank you for reaching out! Our team will connect with you shortly.');
+                        updateContactStatus(successMsg, status);
                     } catch (error) {
                         console.error('ARCHIKMOR contact submission failed:', error);
-                        updateContactStatus(error.message || 'Something went wrong. Please try again later.', 'error');
+                        const errorMsg = error.message || (window.i18n ? window.i18n.get('contact.form.errorGeneric') : 'Something went wrong. Please try again later.');
+                        updateContactStatus(errorMsg, 'error');
                     } finally {
                         toggleContactSubmitting(false);
                     }
@@ -657,7 +789,13 @@
 
             function toggleContactSubmitting(isSubmitting) {
                 contactSubmitBtn.disabled = isSubmitting;
-                contactSubmitBtn.textContent = isSubmitting ? 'Sending...' : defaultSubmitText;
+                if (isSubmitting) {
+                    const sendingText = window.i18n ? window.i18n.get('contact.form.sending') : 'Sending...';
+                    contactSubmitBtn.textContent = sendingText;
+                } else {
+                    const submitText = window.i18n ? window.i18n.get('contact.form.submit') : defaultSubmitText;
+                    contactSubmitBtn.textContent = submitText;
+                }
             }
 
             function updateContactStatus(message, status) {
@@ -678,7 +816,7 @@
             const form = document.getElementById('newsletterForm');
             const newsletterStatus = document.getElementById('newsletterStatus');
             const newsletterSubmitBtn = form?.querySelector('.newsletter-submit');
-            const defaultNewsletterText = newsletterSubmitBtn?.textContent?.trim() ?? 'Subscribe';
+            const defaultNewsletterText = window.i18n ? window.i18n.get('newsletter.subscribe') : (newsletterSubmitBtn?.textContent?.trim() ?? 'Subscribe');
             // Dynamic API URL - works on localhost and network access
             const API_BASE_URL = window.__ARCHIKMOR_API__ ?? ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
                 ? 'http://localhost:3004'
@@ -726,7 +864,13 @@
             function toggleNewsletterSubmitting(isSubmitting) {
                 if (!newsletterSubmitBtn) return;
                 newsletterSubmitBtn.disabled = isSubmitting;
-                newsletterSubmitBtn.textContent = isSubmitting ? 'Subscribing...' : defaultNewsletterText;
+                if (isSubmitting) {
+                    const subscribingText = window.i18n ? window.i18n.get('newsletter.subscribing') : 'Subscribing...';
+                    newsletterSubmitBtn.textContent = subscribingText;
+                } else {
+                    const subscribeText = window.i18n ? window.i18n.get('newsletter.subscribe') : defaultNewsletterText;
+                    newsletterSubmitBtn.textContent = subscribeText;
+                }
             }
 
             function updateNewsletterStatus(message, status) {
@@ -791,17 +935,20 @@
                 };
 
                 if (!payload.email) {
-                    updateNewsletterStatus('Please enter your email address.', 'error');
+                    const errorMsg = window.i18n ? window.i18n.get('newsletter.errorEmail') : 'Please enter your email address.';
+                    updateNewsletterStatus(errorMsg, 'error');
                     return;
                 }
 
                 if (!isValidNewsletterEmail(payload.email)) {
-                    updateNewsletterStatus('Please provide a valid email address.', 'error');
+                    const errorMsg = window.i18n ? window.i18n.get('newsletter.errorInvalid') : 'Please provide a valid email address.';
+                    updateNewsletterStatus(errorMsg, 'error');
                     return;
                 }
 
                 toggleNewsletterSubmitting(true);
-                updateNewsletterStatus('Adding you to our list...', 'pending');
+                const addingMsg = window.i18n ? window.i18n.get('newsletter.adding') : 'Adding you to our list...';
+                updateNewsletterStatus(addingMsg, 'pending');
 
                 try {
                     const response = await fetch(`${API_BASE_URL}/api/newsletter`, {
@@ -815,15 +962,21 @@
                     const responseBody = await response.json().catch(() => ({}));
 
                     if (!response.ok) {
-                        throw new Error(responseBody.error || 'Unable to subscribe right now.');
+                        throw new Error(responseBody.error || (window.i18n ? window.i18n.get('newsletter.errorGeneric') : 'Unable to subscribe right now.'));
                     }
 
                     form.reset();
-                    updateNewsletterStatus(responseBody.message || 'You are now subscribed!', 'success');
+                    // Use appropriate status based on email result
+                    const status = responseBody.emailStatus === 'failed' || responseBody.emailStatus === 'unavailable' 
+                        ? 'warning' 
+                        : 'success';
+                    const successMsg = responseBody.message || (window.i18n ? window.i18n.get('newsletter.success') : 'You are now subscribed!');
+                    updateNewsletterStatus(successMsg, status);
                     setTimeout(() => closeModal(), 1500);
                 } catch (error) {
                     console.error('ARCHIKMOR newsletter subscription failed:', error);
-                    updateNewsletterStatus(error.message || 'Something went wrong. Please try again later.', 'error');
+                    const errorMsg = error.message || (window.i18n ? window.i18n.get('newsletter.errorGeneric') : 'Something went wrong. Please try again later.');
+                    updateNewsletterStatus(errorMsg, 'error');
                 } finally {
                     toggleNewsletterSubmitting(false);
                 }
