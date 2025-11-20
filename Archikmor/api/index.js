@@ -4,11 +4,7 @@
 const app = require('../server/index.js');
 
 // Vercel serverless function handler
-// Vercel will call this function for all /api/* routes
-module.exports = (req, res) => {
-  // Remove the /api prefix from the path since Express routes already have it
-  // Vercel routes /api/* to this function, but Express expects /api/* in the path
-  // So we need to preserve the original path
-  return app(req, res);
-};
+// Vercel automatically routes /api/* requests to this function
+// The Express app already has routes defined with /api/* prefix, so we just pass through
+module.exports = app;
 
