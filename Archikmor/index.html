@@ -533,10 +533,11 @@
             const contactStatus = document.getElementById('contactStatus');
             const contactSubmitBtn = contactForm?.querySelector('.submit-btn');
             const defaultSubmitText = contactSubmitBtn?.textContent?.trim() ?? 'Begin Your Transformation';
-            // Dynamic API URL - works on localhost and network access
+            // Dynamic API URL - works on localhost, Vercel, and network access
+            // On Vercel, use relative paths. On localhost, use the server port.
             const API_BASE_URL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
                 ? 'http://localhost:3004'
-                : `http://${window.location.hostname}:3004`;
+                : ''; // Empty string means relative paths, which works on Vercel
             window.__ARCHIKMOR_API__ = API_BASE_URL;
 
             const hasCoreNavElements = mobileMenuBtn && mobileNav && mobileNavClose && mobileNavOverlay;
@@ -695,42 +696,36 @@
                 directDownload.addEventListener('click', function(e) {
                     e.preventDefault();
                     
+                    // Always try API endpoint first (works on both localhost and Vercel)
                     const downloadUrl = API_BASE_URL 
                         ? `${API_BASE_URL}/api/catalogue/download`
-                        : 'catalogue/Archikmor-Catalog2026.pdf';
+                        : '/api/catalogue/download';
                     
-                    // Try API endpoint first, fallback to static file
-                    if (API_BASE_URL) {
-                        // Use API endpoint for tracking
-                        fetch(downloadUrl)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Download failed');
-                                }
-                                return response.blob();
-                            })
-                            .then(blob => {
-                                const url = window.URL.createObjectURL(blob);
-                                const a = document.createElement('a');
-                                a.href = url;
-                                a.download = 'Archikmor-Catalog2026.pdf';
-                                document.body.appendChild(a);
-                                a.click();
-                                window.URL.revokeObjectURL(url);
-                                document.body.removeChild(a);
-                                showDownloadNotification();
-                            })
-                            .catch(error => {
-                                console.error('API download failed, trying static file:', error);
-                                // Fallback to static file
-                                window.location.href = 'catalogue/Archikmor-Catalog2026.pdf';
-                                showDownloadNotification();
-                            });
-                    } else {
-                        // No API available, use static file
-                        window.location.href = downloadUrl;
-                        showDownloadNotification();
-                    }
+                    // Use API endpoint for tracking
+                    fetch(downloadUrl)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error('Download failed');
+                            }
+                            return response.blob();
+                        })
+                        .then(blob => {
+                            const url = window.URL.createObjectURL(blob);
+                            const a = document.createElement('a');
+                            a.href = url;
+                            a.download = 'Archikmor-Catalog2026.pdf';
+                            document.body.appendChild(a);
+                            a.click();
+                            window.URL.revokeObjectURL(url);
+                            document.body.removeChild(a);
+                            showDownloadNotification();
+                        })
+                        .catch(error => {
+                            console.error('API download failed, trying static file:', error);
+                            // Fallback to static file
+                            window.location.href = 'catalogue/Archikmor-Catalog2026.pdf';
+                            showDownloadNotification();
+                        });
                 });
             }
 
@@ -817,10 +812,11 @@
             const newsletterStatus = document.getElementById('newsletterStatus');
             const newsletterSubmitBtn = form?.querySelector('.newsletter-submit');
             const defaultNewsletterText = window.i18n ? window.i18n.get('newsletter.subscribe') : (newsletterSubmitBtn?.textContent?.trim() ?? 'Subscribe');
-            // Dynamic API URL - works on localhost and network access
+            // Dynamic API URL - works on localhost, Vercel, and network access
+            // On Vercel, use relative paths. On localhost, use the server port.
             const API_BASE_URL = window.__ARCHIKMOR_API__ ?? ((window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
                 ? 'http://localhost:3004'
-                : `http://${window.location.hostname}:3004`);
+                : ''); // Empty string means relative paths, which works on Vercel
 
             if (!modal || !card) return;
 

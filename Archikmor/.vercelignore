@@ -1,0 +1,35 @@
+# Vercel ignore file
+# Files and directories to exclude from deployment
+
+node_modules/
+.env
+.env.local
+.env.*.local
+*.log
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test files
+**/*.test.js
+**/*.spec.js
+server/index.test.js
+
+# Documentation
+*.md
+!README.md
+SUPABASE_SETUP.md
+
+# Development files
+archikmor.code-workspace
+package-lock.json
+
+# Data files (if not needed in production)
+data/*.json
+
+# Migration scripts (not needed in production)
+server/migrate-to-supabase.js
+
