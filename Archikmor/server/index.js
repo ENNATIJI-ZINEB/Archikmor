@@ -5,8 +5,9 @@ const fs = require('fs/promises');
 const fsSync = require('fs');
 const path = require('path');
 const crypto = require('crypto');
-const { sendContactNotification, sendContactConfirmation, sendNewsletterNotification, sendNewsletterConfirmation, sendCatalogueEmail } = require('./email');
-const { getSupabaseClient } = require('./db');
+// Use lib/ folder for shared modules (works for both local dev and Vercel)
+const { sendContactNotification, sendContactConfirmation, sendNewsletterNotification, sendNewsletterConfirmation, sendCatalogueEmail } = require('../lib/email');
+const { getSupabaseClient } = require('../lib/db');
 
 const app = express();
 const PORT = process.env.PORT || 3004;
@@ -85,8 +86,8 @@ app.post('/api/catalogue/email', async (req, res) => {
         return res.status(400).json({ error: 'Please provide a valid email address.' });
     }
 
-    // Check SMTP configuration before attempting to send
-    const { validateSMTPConfig } = require('./email');
+        // Check SMTP configuration before attempting to send
+        const { validateSMTPConfig } = require('../lib/email');
     const smtpConfigured = validateSMTPConfig();
 
     if (!smtpConfigured) {
@@ -211,7 +212,7 @@ app.post('/api/test-contact-confirmation', async (req, res) => {
     const testName = name || 'Test User';
 
     try {
-        const { sendContactConfirmation } = require('./email');
+        const { sendContactConfirmation } = require('../lib/email');
         const testSubmission = {
             name: testName,
             email: testEmail,
@@ -250,7 +251,7 @@ app.post('/api/test-contact-confirmation', async (req, res) => {
 // Test SMTP connection endpoint
 app.get('/api/test-email', async (_req, res) => {
     try {
-        const { sendContactNotification } = require('./email');
+        const { sendContactNotification } = require('../lib/email');
         const nodemailer = require('nodemailer');
         
         // Test transporter

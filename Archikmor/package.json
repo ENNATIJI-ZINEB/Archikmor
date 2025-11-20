@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node server/index.js",
     "dev": "nodemon server/index.js",
+    "build": "echo 'No build step required for static site'",
     "test": "jest"
   },
   "keywords": [],

@@ -7,8 +7,28 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.js"
+      "source": "/api/health",
+      "destination": "/api/health.js"
+    },
+    {
+      "source": "/api/catalogue/download",
+      "destination": "/api/catalogue/download.js"
+    },
+    {
+      "source": "/api/catalogue/email",
+      "destination": "/api/catalogue/email.js"
+    },
+    {
+      "source": "/api/contact",
+      "destination": "/api/contact.js"
+    },
+    {
+      "source": "/api/newsletter",
+      "destination": "/api/newsletter.js"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ],
   "headers": [
