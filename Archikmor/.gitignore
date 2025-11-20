@@ -1,0 +1,23 @@
+# Environment variables
+.env
+
+# Dependencies
+node_modules/
+
+# Data files (optional - uncomment if you don't want to track submissions)
+# data/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
